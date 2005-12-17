@@ -10,7 +10,7 @@
 <source><![CDATA[
 <taskdef name="soimp" classname="org.kohsuke.soimp.Soimp">
   <classpath>
-    <fileset dir="path/to/soimp/" incldues="soimp*.jar, lib/argsj*.jar" />
+    <fileset dir="path/to/soimp/" incldues="soimp*.jar, argsj*.jar" />
   </classpath>
 </taskdef>
 ]]></source>
@@ -66,7 +66,7 @@
 	<source>$ ant -Dsvn.executable=/home/kohsuke/bin/svn ...</source>
 	
 	<div align="right" style="font-size: smaller">
-	$Id: ant.xml,v 1.1 2005-12-17 22:34:06 kohsuke_agent Exp $
+	$Id: ant.xml,v 1.2 2005-12-17 23:10:58 kohsuke_agent Exp $
 	</div>
 </section>
 </body></document>
