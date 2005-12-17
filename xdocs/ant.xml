@@ -1,0 +1,72 @@
+<document>
+<properties>
+	<title>Soimp Ant task</title>
+</properties>
+<body>
+<section name="Description">
+	<p>
+		Use the following taskdef to define soimp task:
+	</p>
+<source><![CDATA[
+<taskdef name="soimp" classname="org.kohsuke.soimp.Soimp">
+  <classpath>
+    <fileset dir="path/to/soimp/" incldues="soimp*.jar, lib/argsj*.jar" />
+  </classpath>
+</taskdef>
+]]></source>
+</section>
+<section name="Parameter Attributes">
+	<table border="1">
+		<thead>
+			<tr>
+				<td>Attribute</td>
+				<td>Description</td>
+				<td>Required</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>dir</td>
+				<td>
+					The source directory that have files to be imported into the repository.
+					This is relative to the base directory of the Ant project.
+				</td>
+				<td>Yes</td>
+			</tr>
+			<tr>
+				<td>repository</td>
+				<td>
+					The repository URL, such as "https://svn.dev.java.net/svn/myproj/www/trunk/javadoc".
+					Files will be imported into this repository.
+				</td>
+				<td>Yes</td>
+			</tr>
+			<tr>
+				<td>create</td>
+				<td>
+					"true" or "false". If true, missing intermediate directories will be created in the repository. For example, if the repository URL is "http://svn.example.com/foo/bar/zot" but only "http://svn.example.com/foo/" exists, then "bat/zot" directory will be created as a part of the operation.
+					If false, the repository URL must already exist. 
+				</td>
+				<td>No. Defaults to "false"</td>
+			</tr>
+			<tr>
+				<td>commitMessage</td>
+				<td>
+					The commit message for svn.
+				</td>
+				<td>No.</td>
+			</tr>
+		</tbody>
+	</table>
+</section>
+<section name="Recognized Properties">
+	<p>
+		If a build property "svn.executable" is set, soimp will use this as an executable file name of Subversion. If <tt>svn</tt> is not available in your PATH, you can use this mechanism to use your own copy of Subversion, like this:
+	</p>
+	<source>$ ant -Dsvn.executable=/home/kohsuke/bin/svn ...</source>
+	
+	<div align="right" style="font-size: smaller">
+	$Id: ant.xml,v 1.1 2005-12-17 22:34:06 kohsuke_agent Exp $
+	</div>
+</section>
+</body></document>
