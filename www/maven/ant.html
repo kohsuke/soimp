@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><title>Soimp - Soimp Ant task</title><style type="text/css" media="all">
+          @import url("./style/maven-base.css");
+          
+			    @import url("./style/maven-theme.css");</style><link rel="stylesheet" href="./style/print.css" type="text/css" media="print"></link><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"></meta></head><body class="composite"><div id="banner"><a href="" id="projectLogo"><span>soimp</span></a><div class="clear"><hr></hr></div></div><div id="breadcrumbs"><div class="xright">
+        
+        <a href="http://www.java.net" class="externalLink" title="External Link">java.net</a>
+      </div><div class="clear"><hr></hr></div></div><div id="leftColumn"><div id="navcolumn"><div id="menuSoimp"><h5>Soimp</h5><ul><li class="none"><a href="index.html">Home</a></li><li class="none"><a href="https://soimp.dev.java.net/servlets/ProjectDocumentList" class="externalLink" title="External Link">Download</a></li><li class="none"><strong><a href="ant.html">Ant Task</a></strong></li></ul></div><div id="menuProject_Documentation"><h5>Project Documentation</h5><ul><li class="none"><a href="index.html">About soimp</a></li><li class="collapsed"><a href="project-info.html">Project Info</a></li><li class="collapsed"><a href="maven-reports.html">Project Reports</a></li><li class="none"><a href="http://maven.apache.org/development-process.html" class="externalLink" title="External Link">Development Process</a></li></ul></div><a href="http://maven.apache.org/" title="Built by Maven" id="poweredBy"><img alt="Built by Maven" src="./images/logos/maven-button-1.png"></img></a></div></div><div id="bodyColumn"><div class="contentBox"><div class="section"><a name="Description"></a><h2>Description</h2><p>
+		Use the following taskdef to define soimp task:
+	</p>
+    <div class="source"><pre>
+&lt;taskdef name="soimp" classname="org.kohsuke.soimp.Soimp"&gt;
+  &lt;classpath&gt;
+    &lt;fileset dir="path/to/soimp/" incldues="soimp*.jar, lib/argsj*.jar" /&gt;
+  &lt;/classpath&gt;
+&lt;/taskdef&gt;
+</pre></div>
+  </div><div class="section"><a name="Parameter_Attributes"></a><h2>Parameter Attributes</h2><table class="bodyTable"><thead>
+			<tr class="a"><td>Attribute</td><td>Description</td><td>Required</td></tr>
+		</thead><tbody>
+			<tr class="b"><td>dir</td><td>
+					The source directory that have files to be imported into the repository.
+					This is relative to the base directory of the Ant project.
+				</td><td>Yes</td></tr>
+			<tr class="a"><td>repository</td><td>
+					The repository URL, such as "https://svn.dev.java.net/svn/myproj/www/trunk/javadoc".
+					Files will be imported into this repository.
+				</td><td>Yes</td></tr>
+			<tr class="b"><td>create</td><td>
+					"true" or "false". If true, missing intermediate directories will be created in the repository. For example, if the repository URL is "http://svn.example.com/foo/bar/zot" but only "http://svn.example.com/foo/" exists, then "bat/zot" directory will be created as a part of the operation.
+					If false, the repository URL must already exist. 
+				</td><td>No. Defaults to "false"</td></tr>
+			<tr class="a"><td>commitMessage</td><td>
+					The commit message for svn.
+				</td><td>No.</td></tr>
+		</tbody></table></div><div class="section"><a name="Recognized_Properties"></a><h2>Recognized Properties</h2><p>
+		If a build property "svn.executable" is set, soimp will use this as an executable file name of Subversion. If <tt>svn</tt> is not available in your PATH, you can use this mechanism to use your own copy of Subversion, like this:
+	</p>
+    <div class="source"><pre>$ ant -Dsvn.executable=/home/kohsuke/bin/svn ...</pre></div>
+  <div align="right" style="font-size: smaller">
+	$Id: ant.xml,v 1.1 2005/12/17 22:34:06 kohsuke_agent Exp $
+	</div></div></div></div><div class="clear"><hr></hr></div><div id="footer"><div class="xright">© -2005, Kohsuke Kawaguchi</div><div class="clear"><hr></hr></div></div></body></html>
