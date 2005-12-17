@@ -2,6 +2,7 @@
 <project>
   <pomVersion>3</pomVersion>
   <groupId>soimp</groupId>
+  <name>soimp</name>
   <artifactId>soimp</artifactId>
   <currentVersion>1.0</currentVersion>
 
@@ -17,7 +18,7 @@
   <description>Import files to subversion (overwrites if necessary)</description>
 
   <repository>
-    <connection>scm:cvs:pserver:guest@${maven.javanet.project}.dev.java.net:/cvs/${maven.javanet.project}:${maven.javanet.project}</connection>
+    <connection>scm:cvs:pserver:guest@cvs.dev.java.net:/cvs:${maven.javanet.project}</connection>
     <url>https://${maven.javanet.project}.dev.java.net/source/browse/${maven.javanet.project}</url>
   </repository>
 
@@ -106,6 +107,6 @@
     <report>maven-jcoverage-plugin</report>
     <report>maven-jxr-plugin</report>
     -->
-    <report>maven-linkcheck-plugin</report>
+    <!--report>maven-linkcheck-plugin</report-->
   </reports>
 </project>
