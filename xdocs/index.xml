@@ -1,0 +1,36 @@
+<document>
+  <properties>
+    <title>Subversion Overwriting Import Tool</title>
+  </properties>
+  <body>
+    <section name="Overview">
+      <p>
+        This tool allows you to update contents in a subversion repository by local files. The behavior is somewhat close to <tt>svn import</tt>, but with a crucial difference; this tool uses local files to overwrite files in the repository, whereas <tt>svn import</tt> aborts the processing if files collide.
+      </p><p>
+        This is primarily useful with a system like java.net, where you need to put files under subversion to post web contents, for example when you want to publish javadoc (by overwriting existing javadoc). That can be done as:
+      </p>
+      <source>$ java -jar soimp.jar target/javadoc https://myproj.dev.java.net/svn/myproj/trunk/www/javadoc/</source>
+      <p>
+        ... instead of:
+      </p>
+      <source>$ svn import target/javadoc https://myproj.dev.java.net/svn/myproj/trunk/www/javadoc/</source>
+      <p>
+        ... which wouldn't have worked if you already have the said directory in the repository.
+      </p>
+    </section>
+    <section name="Soimp from Command Line">
+      <p>
+        Soimp can be run from the command line as follows:
+      </p>
+      <source>$ java -jar soimp.jar</source>
+      <p>
+        This will show the usage screen, which explains all the available options.
+      </p>
+    </section>
+    <section name="Soimp from Ant">
+      <p>
+        Soimp can be used as an Ant task. See <a href="ant.html">this document</a> for more details.
+      </p>
+    </section>
+  </body>
+</document>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <pomVersion>3</pomVersion>
+  <groupId>soimp</groupId>
+  <artifactId>soimp</artifactId>
+  <currentVersion>1.0</currentVersion>
+
+  <organization>
+    <name>Kohsuke Kawaguchi</name>
+    <url>http://www.kohsuke.org/</url>
+    <!--logo>http://today.java.net/im/logo_java.gif</logo-->
+  </organization>
+
+  <package>org.kohsuke.soimp</package>
+
+  <shortDescription>Subversion overwriting import tool</shortDescription>
+  <description>Import files to subversion (overwrites if necessary)</description>
+
+  <repository>
+    <connection>scm:cvs:pserver:guest@${maven.javanet.project}.dev.java.net:/cvs/${maven.javanet.project}:${maven.javanet.project}</connection>
+    <url>https://${maven.javanet.project}.dev.java.net/source/browse/${maven.javanet.project}</url>
+  </repository>
+
+  <issueTrackingUrl>https://${maven.javanet.project}.dev.java.net/servlets/ProjectIssues</issueTrackingUrl>
+  <mailingLists>
+    <mailingList>
+      <name>Users List</name>
+      <subscribe>users-subscribe@${maven.javanet.project}.dev.java.net</subscribe>
+      <unsubscribe>users-unsubscribe@${maven.javanet.project}.dev.java.net</unsubscribe>
+      <archive>https://${maven.javanet.project}.dev.java.net/servlets/SummarizeList?listName=users</archive>
+    </mailingList>
+    <mailingList>
+      <name>Issues List</name>
+      <subscribe>issues-subscribe@${maven.javanet.project}.dev.java.net</subscribe>
+      <unsubscribe>issues-unsubscribe@${maven.javanet.project}.dev.java.net</unsubscribe>
+      <archive>https://${maven.javanet.project}.dev.java.net/servlets/SummarizeList?listName=issues</archive>
+    </mailingList>
+    <mailingList>
+      <name>Commits List</name>
+      <subscribe>commits-subscribe@${maven.javanet.project}.dev.java.net</subscribe>
+      <unsubscribe>commits-unsubscribe@${maven.javanet.project}.dev.java.net</unsubscribe>
+      <archive>https://${maven.javanet.project}.dev.java.net/servlets/SummarizeList?listName=commits</archive>
+    </mailingList>
+  </mailingLists>
+
+  <developers>
+    <developer>
+      <name>Kohsuke Kawaguchi</name>
+      <id>kohsuke</id>
+      <email>kk@kohsuke.org</email>
+    </developer>
+  </developers>
+
+  <dependencies>
+    <dependency>
+      <groupId>ant</groupId>
+      <artifactId>ant</artifactId>
+      <version>1.6</version><!-- any version would do -->
+      <properties>
+        <jar.manifest.classpath>true</jar.manifest.classpath>
+      </properties>
+    </dependency>
+    <dependency>
+      <groupId>args4j</groupId>
+      <artifactId>args4j</artifactId>
+      <version>2.0.1</version>
+      <properties>
+        <jar.manifest.classpath>true</jar.manifest.classpath>
+      </properties>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <sourceDirectory>src/java</sourceDirectory>
+    <!--resources>
+      <resource>
+        <directory>src</directory>
+      </resource>
+    </resources-->
+
+    <!--unitTestSourceDirectory>test</unitTestSourceDirectory>
+    <unitTest>
+      <includes>
+        <include>**/*Test.java</include>
+      </includes>
+      <excludes>
+        <exclude>**/Abstract*TestCase.java</exclude>
+      </excludes>
+      <resources>
+        <resource>
+          <directory>src/test</directory>
+        </resource>
+      </resources>
+    </unitTest-->
+  </build>
+
+  <reports>
+    <report>maven-license-plugin</report>
+    <report>maven-changelog-plugin</report>
+    <report>maven-changes-plugin</report>
+    <report>maven-developer-activity-plugin</report>
+    <report>maven-file-activity-plugin</report>
+    <report>maven-javadoc-plugin</report>
+    <report>maven-junit-report-plugin</report>
+    <!--
+    <report>maven-jcoverage-plugin</report>
+    <report>maven-jxr-plugin</report>
+    -->
+    <report>maven-linkcheck-plugin</report>
+  </reports>
+</project>
