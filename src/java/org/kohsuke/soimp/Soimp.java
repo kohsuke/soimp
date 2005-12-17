@@ -112,6 +112,10 @@ public class Soimp extends Task {
      * Ant entry point.
      */
     public void execute() throws BuildException {
+        String svnExe = getProject().getProperty("svn.executable");
+        if(svnExe!=null)
+            svn = svnExe;
+
         listener = new Listener() {
             public void info(String line) {
                 log(line,Project.MSG_INFO);
