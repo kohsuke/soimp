@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
   <pomVersion>3</pomVersion>
-  <groupId>soimp</groupId>
+  <groupId>org.kohsuke.soimp</groupId>
   <name>soimp</name>
   <artifactId>soimp</artifactId>
   <currentVersion>1.0</currentVersion>
