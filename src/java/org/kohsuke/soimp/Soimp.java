@@ -47,6 +47,12 @@ public class Soimp extends Task {
     @Option(name="-p", usage="create the repository by 'svn mkdir' if necessary")
     boolean create = false;
 
+    @Option(name="-u", usage="specify a username")
+    String username = null;
+
+    @Option(name="-P", usage="specify a password")
+    String password = null;
+
     private Listener listener = Listener.CONSOLE;
 
     public void setSvn(String svn) {
@@ -59,6 +65,14 @@ public class Soimp extends Task {
 
     public void setCreate(boolean create) {
         this.create = create;
+    }
+
+    public void setUsername(String userName) {
+        this.username = userName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setDir(File dir) {
@@ -111,6 +125,7 @@ public class Soimp extends Task {
     /**
      * Ant entry point.
      */
+    @Override
     public void execute() throws BuildException {
         String svnExe = getProject().getProperty("svn.executable");
         if(svnExe!=null)
@@ -152,7 +167,7 @@ public class Soimp extends Task {
                 createRepository(new URL(repository));
 
             // check out to tmp
-            exec(svn+" co "+repository+" .",tmp,"failed to check out");
+            exec(buildSvnWithUsername("co "+repository+" ."),tmp,"failed to check out");
 
             FileSet fs = new FileSet();
             fs.setProject(p);
@@ -170,7 +185,7 @@ public class Soimp extends Task {
             svnUpdate(tmp);
 
             // then commit
-            exec(svn+" commit -m \""+commitMessage+"\"",tmp,"Failed to commit");
+            exec(buildSvnWithUsername("commit -m \""+commitMessage+"\""),tmp,"Failed to commit");
         } finally{
             // clean up
             Delete delTask = new Delete();
@@ -187,7 +202,7 @@ public class Soimp extends Task {
         if(repository.getPath().equals("/"))
             throw new ProcessingException("Illegal repository name");
         try {
-            exec(svn+" proplist "+repository,new File("."),"N/A");
+            exec(buildSvnWithUsername("proplist "+repository),new File("."),"N/A");
         } catch (ProcessingException e) {
             // directory doesn't exist
             URL parent;
@@ -198,7 +213,7 @@ public class Soimp extends Task {
             createRepository(parent);
 
             listener.info(repository+" doesn't exist. creating");
-            exec(svn+" mkdir -m \""+commitMessage+"\" "+repository,new File("."),"Failed to create directory");
+            exec(buildSvnWithUsername("mkdir -m \""+commitMessage+"\" "+repository),new File("."),"Failed to create directory");
         }
     }
 
@@ -210,7 +225,7 @@ public class Soimp extends Task {
 
     public void svnUpdate( File ws ) throws ProcessingException, IOException {
 
-        String log = exec(svn + " status", ws, "Failed to stat the workspace");
+        String log = exec(buildSvnWithUsername("status"), ws, "Failed to stat the workspace");
 
         List<String> newFiles = new ArrayList<String>();
         List<String> deletedFiles = new ArrayList<String>();
@@ -246,13 +261,44 @@ public class Soimp extends Task {
     private void runSvnBatch(String subCmd, File ws, List<String> files) throws IOException, ProcessingException {
         while(!files.isEmpty()) {
             // build up command line
-            StringBuilder cmd = new StringBuilder(svn+' '+subCmd);
+            StringBuilder cmd = new StringBuilder(buildSvnCommand(subCmd));
             for( int i=0; i<20 && !files.isEmpty(); i++ ) {
                 cmd.append(' ').append(files.remove(0));
             }
 
             exec(cmd.toString(),ws,"Failed to "+subCmd);
         }
+    }
+
+    /**
+     * Concatenate svn executable name with svn global options (username/password)
+     * and the svn command.
+     *
+     * @param subCmd The svn command
+     * @return The complete executable command
+     */
+    private String buildSvnWithUsername(final String subCmd) {
+        final StringBuilder command = new StringBuilder();
+        if (username != null) {
+            command.append("--username ").append(username).append(' ');
+        }
+        if (password != null) {
+            command.append("--password ").append(password).append(' ');
+        }
+        command.append(subCmd);
+        return buildSvnCommand(command.toString());
+    }
+
+    /**
+     * Concatenate svn executable name with the svn command.
+     *
+     * @param subCmd The svn command
+     * @return The complete executable command
+     */
+    private String buildSvnCommand(final String subCmd) {
+        final StringBuilder command = new StringBuilder(svn + ' ');
+        command.append(subCmd);
+        return command.toString();
     }
 
     /**
@@ -268,4 +314,5 @@ public class Soimp extends Task {
         }
         return baos.toString();
     }
+
 }

@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.kohsuke.soimp</groupId>
   <artifactId>soimp</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.2-SNAPSHOT</version>
   <description>Import files to subversion (overwrites if necessary)</description>
   <issueManagement>
     <url>https://${maven.javanet.project}.dev.java.net/servlets/ProjectIssues</url>
